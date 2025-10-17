@@ -29,6 +29,12 @@ namespace Task_2 {
 
         public void Go(double km) {
             Console.WriteLine("The car is going " + km + " kilometers.");
+
+            for (int i = 0; i < km; i+= 1) { 
+                Console.Clear();
+                Console.Write($"{travelString(i)}CAR");
+                Thread.Sleep(100);
+            }
             Thread.Sleep((int)(100 * km));
             
             try {
@@ -37,6 +43,14 @@ namespace Task_2 {
             } catch (Exception ex) {
                 Console.WriteLine(ex.Message);
             }
+        }
+
+        private string travelString(int traveled) {
+            string travel = "";
+            for (int i = 0; i < traveled; i++) {
+                travel += "_";
+            }
+            return travel;
         }
 
         public void Refuel(double refuelAmount) {
