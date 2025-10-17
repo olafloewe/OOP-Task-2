@@ -38,5 +38,17 @@ namespace Task_2 {
                 Console.WriteLine(ex.Message);
             }
         }
+
+        public void Refuel(double refuelAmount) {
+            this.engine.Refuel(refuelAmount);
+        }
+
+        public string GetName() { 
+            return $"{make} {model}";
+        }
+
+        public double GetFuelAmount() {
+            return engine.GetFuelAmount();
+        }
     }
 }

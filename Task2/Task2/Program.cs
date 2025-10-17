@@ -8,12 +8,63 @@ namespace Task_2 {
     internal class Program {
         static void Main(string[] args) {
 
-            Engine engine = new Engine(7.0, 50);
-            Car car = new Car("BMW", "M5", new Engine(5.0,60,60));
+            // read make and model
+            Console.Write("Make: ");
+            string make = Console.ReadLine();
+            Console.Write("Model: ");
+            string model = Console.ReadLine();
 
-            car.Go(40);
+            // read engine parameters
+            double displacement = ReadDouble("Displacement in L: ",1);
+            double tankCapacity = ReadDouble("Tank Capacity in L: ",1);
+            double fuelVolume = ReadDouble("Fuel Volume in L: ", 0,tankCapacity);
+ 
+            Car car = new Car(make, model, new Engine(displacement,fuelVolume,tankCapacity));
 
-            Console.WriteLine(engine);
+
+            if (car != null) {
+                bool exit = false;
+                while (!exit) {
+                    Console.Clear();
+                    Console.WriteLine(car.GetName());
+                    Console.WriteLine(car.GetFuelAmount());
+
+                    Console.WriteLine($"[D]rive\n[R]efuel\n[Q]uit");
+                    switch (Console.ReadKey(true).Key) {
+
+                        case ConsoleKey.D:
+                            try { 
+                                car.Go(ReadDouble("Enter distance to travel [km]: ", 1)); 
+                            } catch (Exception ex) { 
+                                Console.WriteLine(ex.Message);
+                            }
+                            Console.ReadKey(true);
+                            break;
+                        case ConsoleKey.R:
+                            try {
+                                car.Refuel(ReadDouble("Enter amount of fuel to refuel [L]: ", 0));
+                            } catch (Exception ex) {
+                                Console.WriteLine(ex.Message);
+                            }
+                            Console.ReadKey(true);
+                            break;
+                        case ConsoleKey.Q:
+                            exit = true;
+                            break;
+                    }
+                }
+            }
+        }
+
+        static double ReadDouble(string prompt, double min = double.MinValue, double max = double.MaxValue) {
+            double value;
+
+            do {
+                Console.WriteLine(prompt);
+                string input = Console.ReadLine();
+                double.TryParse(input, out value);
+            } while(value < min || value > max);
+            return value;
         }
     }
 }

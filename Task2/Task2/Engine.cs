@@ -31,5 +31,14 @@ namespace Task_2 {
             if (fuelConsumed > fuelAmount) throw new ArgumentException("Not enough fuel to drive for " + km + " km !");
             fuelAmount -= fuelConsumed;
         }
+
+        public void Refuel(double refuelAmount) {
+            if (fuelAmount + refuelAmount > tankCapacity) throw new ArgumentException("Too much fuel to fit in the tank!");
+            fuelAmount += refuelAmount;
+        }
+
+        public double GetFuelAmount() {
+            return fuelAmount;
+        }
     }
 }
