@@ -8,11 +8,12 @@ namespace Task_2 {
     internal class Program {
         static void Main(string[] args) {
 
-            Engine engine = new Engine(7.0, 40.0);
+            Engine engine = new Engine(7.0, 50);
+            Car car = new Car("BMW", "M5", new Engine(5.0,60,60));
 
+            car.Go(40);
 
-
-            Console.WriteLine(Engine.convertToLP100(32));
+            Console.WriteLine(engine);
         }
     }
 }
